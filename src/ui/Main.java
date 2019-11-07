@@ -1,18 +1,49 @@
 package ui;
 
-import bl.Construccion.FabricadorDeTropas;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.plaf.FontUIResource;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println(FabricadorDeTropas.procesarFuncion(1));
-        System.out.println(FabricadorDeTropas.procesarFuncion(2));
-        System.out.println(FabricadorDeTropas.procesarFuncion(3));
-        System.out.println(FabricadorDeTropas.procesarFuncion(4));
-        System.out.println(FabricadorDeTropas.procesarFuncion(5));
-        System.out.println(FabricadorDeTropas.procesarFuncion(6));
-        System.out.println(FabricadorDeTropas.procesarFuncion(7));
-        System.out.println(FabricadorDeTropas.procesarFuncion(8));
-        System.out.println(FabricadorDeTropas.procesarFuncion(9));
-        System.out.println(FabricadorDeTropas.procesarFuncion(10));
+
+	/**
+	 * Launch the application.
+	 */
+    public static void main(String args[]) {
+        try {
+            // javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+        	OSUtil.OS_TYPE os = OSUtil.getOSType();
+            if (os == OSUtil.OS_TYPE.WINDOWS) {
+                // Custom Windows L&F and font settings
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
+                // This font looks good but on Windows 7 it misses some chars like the stars...
+                //FontUIResource font = new FontUIResource("Lucida Sans Unicode", Font.PLAIN, 11);
+               // UIManager.put("Table.font", font);
+            } else {
+                for (LookAndFeelInfo ui : UIManager.getInstalledLookAndFeels()) {
+                    System.out.println("Available look and feel: " + ui.getName() + " " + ui.getClassName());
+                    if (ui.getName().equals("Nimbus")) {
+                        UIManager.setLookAndFeel(ui.getClassName());
+                        break;
+                    }
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+            	FrmMain elMain = new FrmMain();
+                elMain.setVisible(true);
+            }
+        });
     }
 }
