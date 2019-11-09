@@ -1,0 +1,14 @@
+package ui.Tablero;
+
+import javax.swing.JPanel;
+
+public class TableroGUI extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public TableroGUI() {
+
+	}
+
+}

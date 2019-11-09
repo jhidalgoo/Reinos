@@ -1,0 +1,15 @@
+package ui.Tablero;
+
+import bl.Construccion.Tablero.Casilla;
+import javax.swing.JPanel;
+
+public class pnlCasilla extends Casilla  {
+
+	/**
+	 * Create the panel.
+	 */
+	public pnlCasilla() {
+
+	}
+
+}

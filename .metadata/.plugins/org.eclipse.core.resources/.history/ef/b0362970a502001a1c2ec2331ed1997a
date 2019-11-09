@@ -1,0 +1,5 @@
+package ui.Tablero;
+
+public class Casilla {
+
+}

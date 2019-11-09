@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.swing.Icon"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="com.sun.glass.ui.Cursor"/>
+<fullyQualifiedTypeName name="ui.OSUtil"/>
+<fullyQualifiedTypeName name="ui.eConfiguracion"/>
+<fullyQualifiedTypeName name="ui.contenedor.OSUtil"/>
+<fullyQualifiedTypeName name="ui.contenedor.FrmMain"/>
+<fullyQualifiedTypeName name="bl.Construccion.Castillo.Castillo"/>
+<fullyQualifiedTypeName name="bl.Construccion.Tablero.Casilla"/>
+<fullyQualifiedTypeName name="ui.Tablero.pnlCasilla"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
+<fullyQualifiedTypeName name="java.awt.Graphics2D"/>
+<fullyQualifiedTypeName name="java.awt.RenderingHints"/>
+<fullyQualifiedTypeName name="java.awt.GradientPaint"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
+<fullyQualifiedTypeName name="bl.Construccion.Tablero.Tablero"/>
+<fullyQualifiedTypeName name="ui.Tablero.pnlTablero"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="bl.Construccion.Fachada.Fachada"/>
+<fullyQualifiedTypeName name="bl.Construccion.Juego.Juego"/>
+<fullyQualifiedTypeName name="bl.Construccion.Jugadores.Jugador"/>
+<fullyQualifiedTypeName name="bl.Construccion.FabricadorDeTropas"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+</qualifiedTypeNameHistroy>

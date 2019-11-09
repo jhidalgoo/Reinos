@@ -1,0 +1,18 @@
+package ui.contenedor.componentes;
+
+import javax.swing.JPanel;
+import ui.eConfiguracion;
+
+public class pnlAbajo extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public pnlAbajo(int width) {
+		this.setLayout(null);
+		this.setSize(width, 110);
+		this.setBackground(eConfiguracion.COLOR_FONDO);
+		this.setForeground(eConfiguracion.COLOR_LETRA);
+	}
+
+}

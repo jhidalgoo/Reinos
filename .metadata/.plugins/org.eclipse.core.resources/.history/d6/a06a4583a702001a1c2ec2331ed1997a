@@ -1,0 +1,22 @@
+package ui.Tablero;
+
+import java.awt.Color;
+
+import javax.swing.JPanel;
+
+import bl.Construccion.Tablero.Tablero;
+
+public class pnlTablero extends JPanel {
+	
+	private Tablero tablero = new Tablero(100,100);
+	
+	private Color[] resaltarCasilla = new Color[]{new Color(255, 255, 92, 255), new Color(255, 255, 162, 255)};
+
+	/**
+	 * Create the panel.
+	 */
+	public pnlTablero() {
+
+	}
+
+}

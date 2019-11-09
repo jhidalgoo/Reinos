@@ -1,0 +1,27 @@
+package ui.Tablero;
+
+import java.awt.Color;
+
+import javax.swing.JPanel;
+import bl.Construccion.Tablero.Casilla;
+
+public class pnlCasilla extends JPanel  implements MouseListener {
+	
+	private Casilla laCasilla = new Casilla();
+	private TableroGUI tablero;
+    private Color[] fondo = new Color[]{new Color(220, 220, 220, 255), new Color(248, 248, 248, 255)};
+
+	/**
+	 * Create the panel.
+	 */
+	public pnlCasilla() {
+
+	}
+	 public pnlCasilla(TableroGUI t) {
+	        initComponents();
+	        this.tablero = t;
+	        // responde a clics:
+	        this.addMouseListener(this);
+	    }
+
+}

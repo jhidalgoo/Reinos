@@ -1,0 +1,33 @@
+package ui.Tablero;
+
+import java.awt.Color;
+
+import javax.swing.JPanel;
+
+import bl.Construccion.Tablero.Tablero;
+
+public class pnlTablero extends JPanel {
+	
+	private Tablero tablero = new Tablero(10,10);
+	private pnlCasilla[][] casillasUI;
+	
+	public Tablero getTablero() {
+		return tablero;
+	}
+
+	private Color[] resaltarCasilla = new Color[]{new Color(255, 255, 92, 255), new Color(255, 255, 162, 255)};
+
+	/**
+	 * Create the panel.
+	 */
+	public pnlTablero() {
+
+	}
+	
+	
+    public void pintarCasilla(int x, int y) {
+    	getTablero().getCasillas()[x][y].setFondo(resaltarCasilla);
+        this.repaint();
+    }
+
+}

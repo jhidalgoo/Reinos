@@ -1,0 +1,23 @@
+package ui;
+
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
+
+public class pnlNombreJugador extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public pnlNombreJugador() {
+		setForeground(new Color(249, 249, 249));
+		setBackground(new Color(51, 51, 51));
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setForeground(new Color(249, 249, 249));
+		lblNewLabel.setBackground(new Color(51, 51, 51));
+		add(lblNewLabel);
+
+	}
+
+}

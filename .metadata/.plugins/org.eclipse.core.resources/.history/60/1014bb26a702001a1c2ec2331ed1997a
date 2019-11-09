@@ -1,0 +1,14 @@
+package ui.Tablero;
+
+import javax.swing.JPanel;
+
+public class pnlTablero extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public pnlTablero() {
+
+	}
+
+}
