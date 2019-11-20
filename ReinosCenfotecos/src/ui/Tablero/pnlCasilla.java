@@ -8,14 +8,11 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import static javax.swing.BorderFactory.createMatteBorder;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import bl.Construccion.Tablero.Casilla;
 
+@SuppressWarnings("serial")
 public class pnlCasilla extends JPanel implements MouseListener {
-
-	//private Casilla laCasilla = new Casilla();
 	private pnlTablero tablero;
 	private Color[] fondo = new Color[] { new Color(220, 220, 220, 255), new Color(248, 248, 248, 255) };
 	private static int[] casillaMarcada = new int[2];
@@ -70,13 +67,13 @@ public class pnlCasilla extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		
 		//Marcamos la casilla seleccionada.
-		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
+		pnlCasilla.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
 		Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
-		this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
+		this.tablero.construirEnCasilla(pnlCasilla.getCasillaMarcada()[0], pnlCasilla.getCasillaMarcada()[1], colorVerde);
 
 		JOptionPane.showMessageDialog(null,
-				"Casilla seleccionada:\nW: " + this.getCasillaMarcada()[0] + ",  H: " + this.getCasillaMarcada()[1]);
+				"Casilla seleccionada:\nW: " + pnlCasilla.getCasillaMarcada()[0] + ",  H: " + pnlCasilla.getCasillaMarcada()[1]);
 
 	}
 

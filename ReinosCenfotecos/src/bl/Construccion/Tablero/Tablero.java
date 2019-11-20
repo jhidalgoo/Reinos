@@ -1,6 +1,5 @@
 package bl.Construccion.Tablero;
 
-import bl.Construccion.Castillo.Castillo;
 import bl.Construccion.IConstruccion;
 
 public class Tablero implements ITablero{

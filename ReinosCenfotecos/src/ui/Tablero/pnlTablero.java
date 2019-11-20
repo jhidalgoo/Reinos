@@ -4,21 +4,17 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import bl.Construccion.Tablero.Tablero;
 
+@SuppressWarnings("serial")
 public class pnlTablero extends JPanel {
 
-	private Tablero tablero = new Tablero(10, 10);
 	private pnlCasilla[][] casillasUI;
-
-	public Tablero getTablero() {
-		return tablero;
-	}
 
 	private Color[] resaltarCasilla = new Color[] { new Color(255, 255, 92, 255), new Color(255, 255, 162, 255) };
 
 	/**
 	 * Create the panel.
 	 */
-	public pnlTablero(int widthTablero, int heightTablero) {
+	public pnlTablero(int widthTablero, int heightTablero, Tablero tablero) {
 		this.setLayout(null);
 		this.setSize(widthTablero, heightTablero);
 		this.setBackground(new java.awt.Color(51, 51, 51));
@@ -42,15 +38,16 @@ public class pnlTablero extends JPanel {
 			}
 
 		}
+
+		// tablero
 	}
 
-	public void pintarCasilla(int x, int y) {
+	public void construirEnCasilla(int x, int y) {
 		casillasUI[x][y].setFondo(resaltarCasilla);
 		this.repaint();
 	}
-	
 
-	public void pintarCasilla(int x, int y, Color[] color) {
+	public void construirEnCasilla(int x, int y, Color[] color) {
 		casillasUI[x][y].setFondo(color);
 		this.repaint();
 	}
