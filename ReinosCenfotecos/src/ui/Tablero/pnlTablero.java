@@ -8,6 +8,8 @@ import bl.Construccion.Tablero.Tablero;
 public class pnlTablero extends JPanel {
 
 	private pnlCasilla[][] casillasUI;
+	private int ancho; // width
+	private int largo; // height
 
 	private Color[] resaltarCasilla = new Color[] { new Color(255, 255, 92, 255), new Color(255, 255, 162, 255) };
 
@@ -20,17 +22,20 @@ public class pnlTablero extends JPanel {
 		this.setBackground(new java.awt.Color(51, 51, 51));
 		this.setForeground(new java.awt.Color(250, 250, 250));
 
-		int sizeCasillaW = (int) widthTablero / tablero.getAncho();
-		int sizeCasillaH = (int) heightTablero / tablero.getLargo();
+		this.setAncho(tablero.getAncho());
+		this.setLargo(tablero.getLargo());
+
+		int sizeCasillaW = (int) widthTablero / this.getAncho();
+		int sizeCasillaH = (int) heightTablero / this.getLargo();
 
 		--sizeCasillaW;
 		--sizeCasillaH;
 
 		int x, y;
-		casillasUI = new pnlCasilla[tablero.getAncho()][tablero.getLargo()];
-		for (int i = 0; i < tablero.getAncho(); i++) {
+		casillasUI = new pnlCasilla[this.getAncho()][this.getLargo()];
+		for (int i = 0; i < this.getAncho(); ++i) {
 			x = (i * sizeCasillaW) + 2;
-			for (int j = 0; j < tablero.getLargo(); j++) {
+			for (int j = 0; j < this.getLargo(); ++j) {
 				casillasUI[i][j] = new pnlCasilla(this);
 				y = (j * sizeCasillaH) + 2;
 				casillasUI[i][j].setBounds(x, y, sizeCasillaW, sizeCasillaH);
@@ -38,8 +43,31 @@ public class pnlTablero extends JPanel {
 			}
 
 		}
+	}
 
-		// tablero
+	public int getAncho() {
+		return ancho;
+	}
+
+	public void setAncho(int ancho) {
+		this.ancho = ancho;
+	}
+
+	public int getLargo() {
+		return largo;
+	}
+
+	public void setLargo(int largo) {
+		this.largo = largo;
+	}
+
+	public void construirEnCasilla(int x, int y, String nombrePieza) {
+
+		// TODO: Aquí se dibuja de acuerdo a la pieza obtenida.
+		// Por ejemplo si es un castillo: mostrar la imagen de un castillo.
+
+		casillasUI[x][y].setFondo(resaltarCasilla);
+		this.repaint();
 	}
 
 	public void construirEnCasilla(int x, int y) {
@@ -53,16 +81,14 @@ public class pnlTablero extends JPanel {
 	}
 
 	public int[] getCoordenadas(pnlCasilla casilla) {
-		int[] coordenadas = new int[2];
-		for (int i = 0; i < this.casillasUI.length; i++) {
-			for (int j = 0; j < this.casillasUI.length; j++) {
+		for (int i = 0; i < this.getAncho(); i++) {
+			for (int j = 0; j < this.getLargo(); j++) {
 				if (this.casillasUI[i][j] == casilla) {
-					coordenadas[0] = i;
-					coordenadas[1] = j;
+					return new int[] {i, j};
 				}
 			}
 		}
-		return coordenadas;
+		return new int[2];
 	}
 
 }

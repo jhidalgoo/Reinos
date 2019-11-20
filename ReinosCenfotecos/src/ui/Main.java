@@ -7,7 +7,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import bl.Construccion.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
 import bl.Construccion.Juego.Juego;
-import bl.Construccion.Tablero.Casilla;
+import bl.Construccion.Tropa.TropaAtaque.Arquero;
+import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.contenedor.FrmMain;
 import ui.contenedor.OSUtil;
 
@@ -72,42 +73,42 @@ public class Main {
 			juego = fachada.construirJuego(cantidadJugadores);
 
 			if (null != juego) {
-				
+
 				elMain.setTableroUI(juego.getTablero());
 
 				/*
-				  for (Jugador jugador : juego.getJugadores()) {
-				      System.out.println(jugador.getNombreJugador());
-				  }
+				 * for (Jugador jugador : juego.getJugadores()) {
+				 * System.out.println(jugador.getNombreJugador()); }
 				 */
-				
-				
-				
-				
-				
-				
 
 				// Mostrar el tablero:
 				elMain.mostrarTablero();
 
-				// Pintar casillas:
-				int[][] inicioCasilla = new int[][] { { 0, 0 }, { 9, 9 }, { 9, 0 }, { 0, 9 } };
-				for (int i = 0; i < cantidadJugadores; ++i) {
-					elMain.getTableroUI().construirEnCasilla(inicioCasilla[i][0], inicioCasilla[i][1]);
-				}
 				
+				
+				TropaAtaque pieza = new Arquero();
+				juego.getJugadores().get(0).getTropas().add(pieza);
 
-				for (Casilla[] casi : juego.getTablero().getCasillas()) {
-					for (Casilla casilla : casi) {
-						//System.out.println(casilla.getX()+" - "+casilla.getY());
+				//Ejemplo:
+				juego.getTablero().getCasillas()[0][1].setPieza(pieza);
+				System.out.println(juego.getTablero().recorrerTablero());			
+				
+				
+				
+				// Pintar casillas que no están vacias:
+				for (int i = 0; i < juego.getTablero().getAncho(); i++) {
+					for (int j = 0; j < juego.getTablero().getLargo(); j++) {
+						if (juego.getTablero().getCasillas()[i][j].getPieza() != null) {
+							String nombrePieza = juego.getTablero().getCasillas()[i][j].getPieza().getNombre();
+							elMain.getTableroUI().construirEnCasilla(i, j, nombrePieza);	
+							
+						}
 					}
-				}
+				}				
+				
 
 				
-				
-				
-				
-				
+
 			} else {
 				elMain.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 				elMain.setVisible(false);
