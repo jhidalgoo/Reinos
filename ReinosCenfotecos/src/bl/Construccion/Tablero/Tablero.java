@@ -45,20 +45,18 @@ public class Tablero implements ITablero{
     private void generarCasillas(int pAncho, int pLargo){
         for(int i = 0; i < pAncho; i++){
             for(int j = 0; j < pLargo; j++){
-                this.casillas[i][j] = new Casilla();
+                this.casillas[i][j] = new Casilla(i,j);
             }
         }
     }
 
-    public void generarGemas() {
-
-    }
-
-    public void generarPowerUps() {
-
-    }
-
-    public void generarCastillos() {
-
+    public boolean esCasillasValida(Casilla casilla){
+        if(casilla.getX() == 0 && (casilla.getY() == 0 || casilla.getY() == getAncho() - 1)){
+            return false;
+        }
+        else if(casilla.getX() == 9 && (casilla.getY() == 0 || casilla.getY() == getLargo() - 1)){
+            return false;
+        }
+        return true;
     }
 }
