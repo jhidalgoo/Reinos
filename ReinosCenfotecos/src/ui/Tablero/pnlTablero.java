@@ -1,9 +1,7 @@
 package ui.Tablero;
 
 import java.awt.Color;
-
 import javax.swing.JPanel;
-
 import bl.Construccion.Tablero.Tablero;
 
 public class pnlTablero extends JPanel {
