@@ -9,7 +9,8 @@ import bl.Construccion.Recursos.PowerUps.Tipo.AumentoDefensa;
 import bl.Construccion.Recursos.PowerUps.Tipo.TrampaAtaque;
 import bl.Construccion.Recursos.PowerUps.Tipo.TrampaDefensa;
 
-public class FabricaCasillas implements MetodoFabrica{
+
+public class FabricaCasillas implements MetodoFabrica {
 
     @Override
     public IRecurso crearGemas(int cantGema) {

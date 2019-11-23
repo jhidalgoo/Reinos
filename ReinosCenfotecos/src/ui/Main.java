@@ -7,6 +7,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import bl.Construccion.FabricadorDeTropas;
 import bl.Construccion.Fachada.Fachada;
 import bl.Construccion.Juego.Juego;
+import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tropa.TropaAtaque.Arquero;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.contenedor.FrmMain;
@@ -20,8 +21,6 @@ public class Main {
 
 	public static void main(String args[]) throws IOException {
 		try {
-			// javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
 			OSUtil.OS_TYPE os = OSUtil.getOSType();
 			if (os == OSUtil.OS_TYPE.WINDOWS) {
 				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -76,38 +75,30 @@ public class Main {
 
 				elMain.setTableroUI(juego.getTablero());
 
-				/*
-				 * for (Jugador jugador : juego.getJugadores()) {
-				 * System.out.println(jugador.getNombreJugador()); }
-				 */
+				for (Jugador jugador : juego.getJugadores()) {
+					System.out.println(jugador.getNombreJugador());
+				}
 
 				// Mostrar el tablero:
 				elMain.mostrarTablero();
 
-				
-				
 				TropaAtaque pieza = new Arquero();
 				juego.getJugadores().get(0).getTropas().add(pieza);
 
-				//Ejemplo:
+				// Ejemplo:
 				juego.getTablero().getCasillas()[0][1].setPieza(pieza);
-				System.out.println(juego.getTablero().recorrerTablero());			
-				
-				
-				
+				System.out.println(juego.getTablero().recorrerTablero());
+
 				// Pintar casillas que no están vacias:
 				for (int i = 0; i < juego.getTablero().getAncho(); i++) {
 					for (int j = 0; j < juego.getTablero().getLargo(); j++) {
 						if (juego.getTablero().getCasillas()[i][j].getPieza() != null) {
 							String nombrePieza = juego.getTablero().getCasillas()[i][j].getPieza().getNombre();
-							elMain.getTableroUI().construirEnCasilla(i, j, nombrePieza);	
-							
+							elMain.getTableroUI().construirEnCasilla(i, j, nombrePieza);
+
 						}
 					}
-				}				
-				
-
-				
+				}
 
 			} else {
 				elMain.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

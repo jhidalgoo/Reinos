@@ -18,19 +18,13 @@ public class ConstructorDosJugadores extends ConstructorTablero {
 		this.juego.getTablero().construirEnCasilla(9, 9, jugador2.getCastillo());
 	}
 
-	@Override
-	public void generarIterador() {
-		Agregado agregado = new Agregado(this.juego);
-		this.juego.setIterador(agregado.getIterador());
-	}
+    @Override
+    public void generarIterador() {
+        Agregado agregado = new Agregado(this.juego);
+        this.juego.setIterador(agregado.getIterador());
+    }
 
-	@Override
-	public void generarGemas() {
 
-	}
 
-	@Override
-	public void generarPowerUps() {
 
 	}
-}

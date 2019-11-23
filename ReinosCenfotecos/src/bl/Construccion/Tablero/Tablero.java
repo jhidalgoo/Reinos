@@ -3,24 +3,25 @@ package bl.Construccion.Tablero;
 import bl.Construccion.Construccion;
 
 public class Tablero implements ITablero {
-	private Casilla[][] casillas;
-	private int ancho; // width
-	private int largo; // height
+    private Casilla[][] casillas;
+    private int ancho; //width
+    private int largo; //height
 
-	public Tablero(int ancho, int largo) {
-		setAncho(ancho);
+    public Tablero(int ancho, int largo) {
+        setAncho(ancho);
 		setLargo(largo);
-		casillas = new Casilla[ancho][largo];
-		generarCasillas(ancho, largo);
-	}
+        setLargo(largo);
+        casillas  = new Casilla[ancho][largo];
+        generarCasillas(ancho,largo);
+    }
 
 	public int getAncho() {
 		return ancho;
-	}
+    }
 
-	public void setAncho(int ancho) {
-		this.ancho = ancho;
-	}
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+    }
 
 	public int getLargo() {
 		return largo;
@@ -38,25 +39,64 @@ public class Tablero implements ITablero {
 		this.casillas = casillas;
 	}
 
-	public void construirEnCasilla(int pAncho, int pLargo, Construccion pConstruccion) {
-		this.getCasillas()[pAncho][pLargo].setPieza(pConstruccion);
+    public void construirEnCasilla(int pAncho, int pLargo, Construccion pConstruccion) {
+        this.getCasillas()[pAncho][pLargo].setPieza(pConstruccion);
 	}
 
-	private void generarCasillas(int pAncho, int pLargo) {
-		for (int i = 0; i < pAncho; i++) {
-			for (int j = 0; j < pLargo; j++) {
-				this.casillas[i][j] = new Casilla(i, j);
+    private void generarCasillas(int pAncho, int pLargo){
+        for(int i = 0; i < pAncho; i++){
+            for(int j = 0; j < pLargo; j++){
+                this.casillas[i][j] = new Casilla(i,j);
 			}
 		}
 	}
 
-	public boolean esCasillasValida(Casilla casilla) {
-		if (casilla.getX() == 0 && (casilla.getY() == 0 || casilla.getY() == getAncho() - 1)) {
-			return false;
-		} else if (casilla.getX() == 9 && (casilla.getY() == 0 || casilla.getY() == getLargo() - 1)) {
+    public boolean esCasillasValida(Casilla casilla){
+        if(casilla.getX() == 0 && (casilla.getY() == 0 || casilla.getY() == getAncho() - 1)){
+            return false;
+        }
+        else if(casilla.getX() == 9 && (casilla.getY() == 0 || casilla.getY() == getLargo() - 1)){
 			return false;
 		}
-		return true;
+        else{
+        return true;
+        }
+    }
+
+    private Construccion obtenerPiezaCasilla(int coordenadaX, int coordenadaY){
+        try{
+
+            return casillas[coordenadaX][coordenadaY].getPieza();
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    private void colocarPiezaCasilla(int coordenadaX, int coordenadaY, Construccion pieza){
+
+            casillas[coordenadaX][coordenadaY].setPieza(pieza);
+    }
+
+    private void removerPiezaCasilla(int coordenadaX, int coordenadaY){
+
+        casillas[coordenadaX][coordenadaY].setPieza(null);
+    }
+
+    @Override
+    public void generarGemas() {
+
+    }
+
+    @Override
+    public void generarPowerUps() {
+
+    }
+
+    @Override
+    public void generarCastillos() {
+
 	}
 
 	public String moverPieza(int origenX, int origenY, int destinoX, int destinoY) throws Exception {
@@ -76,7 +116,7 @@ public class Tablero implements ITablero {
 			throw new Exception("No hay una pieza en la casilla de origen");
 
 		} else {
-			throw new Exception("El movimiento solicitado es inválido");
+			throw new Exception("El movimiento solicitado es invï¿½lido");
 		}
 	}
 
@@ -86,27 +126,6 @@ public class Tablero implements ITablero {
 		} else {
 			return true;
 		}
-	}
-
-	private Construccion obtenerPiezaCasilla(int coordenadaX, int coordenadaY) {
-		try {
-
-			return getCasillas()[coordenadaX][coordenadaY].getPieza();
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
-
-	private void colocarPiezaCasilla(int coordenadaX, int coordenadaY, Construccion pieza) {
-
-		getCasillas()[coordenadaX][coordenadaY].setPieza(pieza);
-	}
-
-	private void removerPiezaCasilla(int coordenadaX, int coordenadaY) {
-
-		getCasillas()[coordenadaX][coordenadaY].setPieza(null);
 	}
 
 	@Override
@@ -124,20 +143,6 @@ public class Tablero implements ITablero {
 			tablero += "\n";
 		}
 		return tablero;
-	}
-
-	@Override
-	public void generarGemas() {
-
-	}
-
-	@Override
-	public void generarPowerUps() {
-
-	}
-
-	@Override
-	public void generarCastillos() {
 	}
 
 }

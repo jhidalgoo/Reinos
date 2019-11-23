@@ -11,12 +11,13 @@ public class Juego implements IJuego {
 	private int cantidadJugadores;
 	private Tablero tablero;
 	private ArrayList<Jugador> jugadores;
-	private IIterador iterador;
+    private IIterador iterador;
 
-	public Juego(int cantidadJugadores, Tablero tablero) {
+    public Juego(int cantidadJugadores, Tablero tablero, IIterador iterador) {
 		this.cantidadJugadores = cantidadJugadores;
 		this.tablero = tablero;
 		this.jugadores = new ArrayList<>();
+        this.iterador = iterador;
 	}
 
 	public Juego() {
@@ -57,14 +58,14 @@ public class Juego implements IJuego {
 
 	public void agregarJugador(Jugador pJugador) {
 		this.jugadores.add(pJugador);
-	}
+    }
 
-	public IIterador getIterador() {
-		return iterador;
-	}
+    public IIterador getIterador() {
+        return iterador;
+    }
 
-	public void setIterador(IIterador iterador) {
-		this.iterador = iterador;
+    public void setIterador(IIterador iterador) {
+        this.iterador = iterador;
 	}
 
 	@Override

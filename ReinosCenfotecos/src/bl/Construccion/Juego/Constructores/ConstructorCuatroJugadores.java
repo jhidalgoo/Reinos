@@ -1,7 +1,7 @@
 package bl.Construccion.Juego.Constructores;
 
-import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Juego.Turno.Agregado.Agregado;
+import bl.Construccion.Jugadores.Jugador;
 
 public class ConstructorCuatroJugadores extends ConstructorTablero {
 	@Override
@@ -30,13 +30,8 @@ public class ConstructorCuatroJugadores extends ConstructorTablero {
 		this.juego.setIterador(agregado.getIterador());
 	}
 
-	@Override
-	public void generarGemas() {
 
-	}
 
-	@Override
-	public void generarPowerUps() {
 
-	}
 }
+

@@ -17,3 +17,5 @@ public class Director {
 		constructorTablero.generarPowerUps();
 	}
 }
+
+

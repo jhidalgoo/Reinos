@@ -67,7 +67,7 @@ public abstract class ConstructorTablero {
 
     private int numeroAleatorio(int min, int max){
         if (min >= max) {
-            throw new IllegalArgumentException("Error máximo debe ser mayor al minimo");
+            throw new IllegalArgumentException("Error maximo debe ser mayor a minimo");
         }
 
         Random r = new Random();

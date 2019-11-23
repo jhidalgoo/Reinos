@@ -1,15 +1,19 @@
 package bl.Construccion.Recursos.Gemas;
 
 import bl.Construccion.Recursos.IRecurso;
-import bl.Construccion.Recursos.Oro.Oro;
 
 public class Gema implements IRecurso {
     private String color;
-    private Oro valor;
+    private int valor;
 
     public Gema(String color, int valor) {
-        setColor(color);
-        setValor(valor);
+        this.color = color;
+        this.valor = valor;
+    }
+
+    public Gema() {
+        this.color = "";
+        this.valor = 0;
     }
 
     public String getColor() {
@@ -20,12 +24,12 @@ public class Gema implements IRecurso {
         this.color = color;
     }
 
-    public Oro getValor() {
+    public int getValor() {
         return valor;
     }
 
     public void setValor(int valor) {
-        this.valor = new Oro(valor);
+        this.valor = valor;
     }
 
     @Override

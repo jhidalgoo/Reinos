@@ -1,9 +1,10 @@
 package bl.Construccion;
 
+import bl.Construccion.Fabricas.*;
 import bl.Construccion.Fabricas.Abstracta.FabricaTropas;
-import bl.Construccion.Fabricas.FabricaCastillo;
 import bl.Construccion.Fabricas.FabricasTropasAtaque.*;
-import bl.Construccion.Fabricas.FabricasTropasDefensa.*;
+import bl.Construccion.Fabricas.FabricasTropasDefensa.FabricaBallesta;
+import bl.Construccion.Fabricas.FabricasTropasDefensa.FabricaCatapulta;
 
 public class FabricadorDeTropas {
 
@@ -62,8 +63,6 @@ public class FabricadorDeTropas {
                 fabricaTropa = new FabricaEspia();
                 sMensaje = CrearFabricaDeTropas(fabricaTropa);
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + pOpc);
         }
 
         return sMensaje ;
@@ -72,6 +71,6 @@ public class FabricadorDeTropas {
 
     private static String CrearFabricaDeTropas(FabricaTropas pFabrica) {
         Construccion construccion = pFabrica.crearTropa();
-        return construccion.getInfo();
+        return construccion.getNombre();
     }
 }
