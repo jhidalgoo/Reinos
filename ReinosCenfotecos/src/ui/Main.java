@@ -58,7 +58,7 @@ public class Main {
 
 		if (cantidadJugadores < 5) {
 
-			System.out.println(FabricadorDeTropas.procesarFuncion(1));
+			/*System.out.println(FabricadorDeTropas.procesarFuncion(1));
 			System.out.println(FabricadorDeTropas.procesarFuncion(2));
 			System.out.println(FabricadorDeTropas.procesarFuncion(3));
 			System.out.println(FabricadorDeTropas.procesarFuncion(4));
@@ -67,7 +67,18 @@ public class Main {
 			System.out.println(FabricadorDeTropas.procesarFuncion(7));
 			System.out.println(FabricadorDeTropas.procesarFuncion(8));
 			System.out.println(FabricadorDeTropas.procesarFuncion(9));
-			System.out.println(FabricadorDeTropas.procesarFuncion(10));
+			System.out.println(FabricadorDeTropas.procesarFuncion(10));*/
+			
+			FabricadorDeTropas.procesarFuncion(1);
+			FabricadorDeTropas.procesarFuncion(2);
+			FabricadorDeTropas.procesarFuncion(3);
+			FabricadorDeTropas.procesarFuncion(4);
+			FabricadorDeTropas.procesarFuncion(5);
+			FabricadorDeTropas.procesarFuncion(6);
+			FabricadorDeTropas.procesarFuncion(7);
+			FabricadorDeTropas.procesarFuncion(8);
+			FabricadorDeTropas.procesarFuncion(9);
+			FabricadorDeTropas.procesarFuncion(10);
 
 			juego = fachada.construirJuego(cantidadJugadores);
 
@@ -76,6 +87,8 @@ public class Main {
 				elMain.setTableroUI(juego.getTablero());
 
 				for (Jugador jugador : juego.getJugadores()) {
+					jugador.setNombreJugador("Jugador"+cantidadJugadores);
+					--cantidadJugadores;
 					System.out.println(jugador.getNombreJugador());
 				}
 
