@@ -1,5 +1,6 @@
 package bl.Construccion.Juego.Turno.Agregado;
 
+import bl.Construccion.Juego.Juego;
 import bl.Construccion.Juego.Turno.Iterador.IIterador;
 import bl.Construccion.Jugadores.Jugador;
 
