@@ -28,16 +28,13 @@ public class pnlTablero extends JPanel {
 		this.setAncho(tablero.getAncho());
 		this.setLargo(tablero.getLargo());
 
-	/*	this.setAncho(tablero.getLargo());
-		this.setLargo(tablero.getAncho());*/
-
-		int sizeCasillaW = (int) anchoTablero / this.getAncho();
-		int sizeCasillaH = (int) largoTablero / this.getLargo();
+		int sizeCasillaW = (int) anchoTablero / this.getLargo();
+		int sizeCasillaH = (int) largoTablero / this.getAncho();
 
 		--sizeCasillaW;
 		--sizeCasillaH;
 		construirCasillas(sizeCasillaW, sizeCasillaH);
-		
+
 		// Pintar casillas que no están vacias:
 		for (Casilla[] i : tablero.getCasillas()) {
 			for (Casilla j : i) {
@@ -55,15 +52,9 @@ public class pnlTablero extends JPanel {
 				}
 			}
 		}
-		
-		
-		
-		
-		
-
+		System.out.println("\n\n");
 	}
 
-	
 	private void construirCasillas(int sizeCasillaW, int sizeCasillaH) {
 		int x, y;
 		casillasUI = new pnlCasilla[this.getAncho()][this.getLargo()];

@@ -32,7 +32,7 @@ public class Juego implements IJuego {
 
 	public Juego() {
 		setCantidadJugadores(0);
-		setTablero(new Tablero(10, 8));
+		setTablero(new Tablero(10, 10));
 		setJugadores(new ArrayList<>());
 		setTurnoActual(new Turno());
 		setDado(new Dado());
@@ -41,7 +41,7 @@ public class Juego implements IJuego {
 
 	public Juego(int cantidadJugadores) {
 		setCantidadJugadores(cantidadJugadores);
-		setTablero(new Tablero(10, 8));
+		setTablero(new Tablero(10, 10));
 		setJugadores(new ArrayList<>());
 		setTurnoActual(new Turno());
 		setDado(new Dado());

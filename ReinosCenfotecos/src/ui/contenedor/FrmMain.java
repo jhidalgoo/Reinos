@@ -30,7 +30,6 @@ import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class FrmMain extends JFrame {
-	
 
 	private static Juego juego;
 
@@ -141,8 +140,7 @@ public class FrmMain extends JFrame {
 		controlesAncho = Math.round((controlesAncho / 2) / 2);
 
 		pnlControles.setBounds(controlesAncho, 0, pnlControles.getWidth(), pnlControles.getHeight());
-		
-		
+
 		pnlControles.setVisible(false);
 
 		pPnlAbajo.setBounds(0, (mainAlto - pPnlAbajo.getHeight()), pnlMain.getWidth(), pPnlAbajo.getHeight());
@@ -260,7 +258,7 @@ public class FrmMain extends JFrame {
 	public void setCantidadJugadores(int cantidadJugadores) {
 		this.cantidadJugadores = cantidadJugadores;
 	}
-	
+
 	private int getCantidadDeJugadores() {
 		int opcion = 0;
 		String cad = "Seleccione la cantidad de jugadores:\n";
@@ -273,17 +271,16 @@ public class FrmMain extends JFrame {
 
 		return opcion;
 	}
-	
-	
+
 	public void pasarTurno() {
 		juego.pasarTurno();
 	}
-	
+
 	public void iniciar() {
-		
+
 		int cantidadJugadores = getCantidadDeJugadores();
 		this.setCantidadJugadores(cantidadJugadores);
-		
+
 		/*
 		 * System.out.println(FabricadorDeTropas.procesarFuncion(1));
 		 * System.out.println(FabricadorDeTropas.procesarFuncion(2));
@@ -310,13 +307,11 @@ public class FrmMain extends JFrame {
 
 		juego = new Fachada().construirJuego(cantidadJugadores);
 
-		
-		
 		Tropa tropa = new Arquero();
 		juego.getJugadores().get(0).getTropas().add(tropa);
-		juego.getTablero().construirEnCasilla(0, 1, tropa);
-		
-		
+		juego.getTablero().construirEnCasilla(0, 4, tropa);
+
+		// Envía el tablero a pnlTablero:
 		this.setTableroUI(juego.getTablero());
 
 		// Nombre del jugador:
@@ -325,11 +320,11 @@ public class FrmMain extends JFrame {
 			jugador.setNombreJugador("Jugador" + numJugador);
 			++numJugador;
 		}
-		
+
 		// pasarTurno();
-		
+
 		System.out.println(juego.getTablero().recorrerTablero());
-		
+
 		// Mostrar el tablero:
 		this.mostrarTablero();
 

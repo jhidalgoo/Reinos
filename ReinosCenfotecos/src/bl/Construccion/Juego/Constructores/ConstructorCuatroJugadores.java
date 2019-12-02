@@ -19,9 +19,9 @@ public class ConstructorCuatroJugadores extends ConstructorTablero {
 		Jugador jugador3 = this.juego.getJugadores().get(2);
 		Jugador jugador4 = this.juego.getJugadores().get(3);
 		this.juego.getTablero().construirEnCasilla(0, 0, jugador1.getCastillo());
-		this.juego.getTablero().construirEnCasilla(7, 7, jugador2.getCastillo());
-		this.juego.getTablero().construirEnCasilla(7, 0, jugador3.getCastillo());
-		this.juego.getTablero().construirEnCasilla(0, 7, jugador4.getCastillo());
+		this.juego.getTablero().construirEnCasilla(9, 9, jugador2.getCastillo());
+		this.juego.getTablero().construirEnCasilla(9, 0, jugador3.getCastillo());
+		this.juego.getTablero().construirEnCasilla(0, 9, jugador4.getCastillo());
 	}
 
 	@Override
