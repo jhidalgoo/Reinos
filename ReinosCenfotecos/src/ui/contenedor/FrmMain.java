@@ -3,7 +3,6 @@ package ui.contenedor;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,15 +15,13 @@ import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.Arquero;
-import bl.Construccion.Tropa.TropaAtaque.Asesino;
-import ui.contenedor.Controles.Tienda.pnlTienda;
 import ui.eConfiguracion;
+import ui.eIMG;
 import ui.contenedor.Controles.pnlControles;
 import ui.Tablero.pnlTablero;
 import ui.contenedor.componentes.*;
 import java.awt.Toolkit;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -60,8 +57,8 @@ public class FrmMain extends JFrame {
 		this.setResizable(false);
 		this.setState(Frame.MAXIMIZED_BOTH);
 		this.setUndecorated(true);
-		this.setTitle("Reinos Cenfotecos");
-		this.setIcono(this, "/ui/imagenes/Xprogram.png");
+		this.setTitle(eConfiguracion.TITULO_APP);
+		this.setIconImage(eIMG.getImage(eIMG.IMG_APP));
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
 		this.setPantallaCompleta();
@@ -222,7 +219,7 @@ public class FrmMain extends JFrame {
 		Object[] opciones = { "Si", "Cancelar" };
 		Icon icono = null;
 		try {
-			icono = new ImageIcon(this.getClass().getResource("/ui/Imagenes/salir.png"));
+			icono = eIMG.getIcon(eIMG.IMG_SALIR);
 		} catch (Exception e) {
 		}
 		int opcion = JOptionPane.showOptionDialog(null, "<html><b>�Seguro que desea salir?</b></html>", " ",
@@ -241,17 +238,6 @@ public class FrmMain extends JFrame {
 		int largoBarraTareas = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(screenSize.width, screenSize.height - largoBarraTareas);
-	}
-
-	private void setIcono(JFrame contenedor, String nombreImagen) {
-		try {
-			Image xIMAGEN = new ImageIcon(getClass().getResource(nombreImagen)).getImage().getScaledInstance(96, 96,
-					Image.SCALE_SMOOTH);
-
-			contenedor.setIconImage(xIMAGEN);
-		} catch (Exception ex) {
-			System.err.println("no carg� icono!");
-		}
 	}
 
 	public void mostrarTablero() {
@@ -328,6 +314,7 @@ public class FrmMain extends JFrame {
 		return juego;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setJuego(Juego juego) {
 		this.juego = juego;
 	}

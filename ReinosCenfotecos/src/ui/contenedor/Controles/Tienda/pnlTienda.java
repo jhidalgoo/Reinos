@@ -1,6 +1,7 @@
 package ui.contenedor.Controles.Tienda;
 
 import ui.eConfiguracion;
+import ui.eIMG;
 import ui.contenedor.FrmMain;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -31,15 +32,18 @@ public class pnlTienda extends JFrame {
 	private JButton ballesta;
 
 	public pnlTienda() {
+		this.setSize(600, 600);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setResizable(false);
+		this.setTitle(eConfiguracion.TITULO_APP);
+		this.setIconImage(eIMG.getImage(eIMG.IMG_APP));
+		this.setBackground(eConfiguracion.COLOR_FONDO);
+		this.setForeground(eConfiguracion.COLOR_LETRA);
+		this.setAlwaysOnTop(false);
 
-		setTitle(eConfiguracion.TITULO_APP);
-		// setLayout(new BorderLayout());
-		setSize(600, 600);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-		setVisible(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setResizable(false);
+		// centrar:
+		this.setLocationRelativeTo(null);
 
 		// PANEL PRINCIPAL
 		panelPrincipal = new JPanel();
@@ -129,33 +133,41 @@ public class pnlTienda extends JFrame {
 
 		// Botones tropas
 
-		arquero = new JButton("Arquero - 10 oro");
+		arquero = new JButton("   Arquero - 10 oro ");
+		setIconButton(arquero, eIMG.IMG_ARQUERO);
 		panelTropas.add(arquero);
 
-		asesino = new JButton("Asesino - 5 oro");
+		asesino = new JButton("    Asesino - 5 oro      ");
+		setIconButton(asesino, eIMG.IMG_ASESINO);
 		panelTropas.add(asesino);
 
-		bersequer = new JButton("Berserquer - 2 oro");
+		bersequer = new JButton("   Berserquer - 2 oro");
+		setIconButton(bersequer, eIMG.IMG_BERSEQUER);
 		panelTropas.add(bersequer);
 
-		espadachin = new JButton("EspadachÃ­n - 15 oro");
+		espadachin = new JButton("   Espadachín - 15 oro");
+		setIconButton(espadachin, eIMG.IMG_ESPADACHIN);
 		panelTropas.add(espadachin);
 
-		espia = new JButton("EspÃ­a - 5 oro");
+		espia = new JButton("   Espía - 5 oro          ");
+		setIconButton(espia, eIMG.IMG_ESPIA);
 		panelTropas.add(espia);
 
-		jinete = new JButton("Jinete - 15 oro");
+		jinete = new JButton("   Jinete - 15 oro          ");
+		setIconButton(jinete, eIMG.IMG_JINETE);
 		panelTropas.add(jinete);
 
-		mago = new JButton("Mago - 10 oro");
+		mago = new JButton("   Mago - 10 oro          ");
 		panelTropas.add(mago);
 
 		// Botones defensas
 
-		catapulta = new JButton("Catapulta - 8 oro");
+		catapulta = new JButton("   Catapulta - 8 oro");
+		setIconButton(catapulta, eIMG.IMG_CATAPULTA);
 		panelDefensas.add(catapulta);
 
-		ballesta = new JButton("Ballesta - 5 oro");
+		ballesta = new JButton("   Ballesta - 5 oro    ");
+		setIconButton(ballesta, eIMG.IMG_BALLESTA);
 		panelDefensas.add(ballesta);
 
 		// this.add(panelPrincipal);
@@ -201,5 +213,15 @@ public class pnlTienda extends JFrame {
 
 	private void actualizarOro() {
 		oroJugador.setText("Oro disponible: " + FrmMain.juego.getTurnoActual().getJugador().getCastillo().getOros());
+	}
+
+	private void setIconButton(JButton btn, String nombreIcono) {
+		btn.setIcon(eIMG.getIcon(nombreIcono));
+		btn.setSelectedIcon(eIMG.getIcon(nombreIcono));
+		btn.setIconTextGap(2);
+		btn.setHorizontalAlignment(SwingConstants.CENTER);
+		btn.setVerticalAlignment(SwingConstants.CENTER);
+		btn.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btn.setVerticalTextPosition(SwingConstants.CENTER);
 	}
 }
