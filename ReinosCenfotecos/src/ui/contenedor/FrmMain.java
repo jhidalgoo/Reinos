@@ -222,7 +222,7 @@ public class FrmMain extends JFrame {
 			icono = eIMG.getIcon(eIMG.IMG_SALIR);
 		} catch (Exception e) {
 		}
-		int opcion = JOptionPane.showOptionDialog(null, "<html><b>�Seguro que desea salir?</b></html>", " ",
+		int opcion = JOptionPane.showOptionDialog(null, "<html><b>¿Seguro que desea salir?</b></html>", " ",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icono, opciones, opciones[1]);
 
 		if (opcion == JOptionPane.YES_OPTION) {
@@ -234,7 +234,7 @@ public class FrmMain extends JFrame {
 	}
 
 	private void setPantallaCompleta() {
-		// Toolkit para conocer la resoluci�n de la pantalla.
+		// Toolkit para conocer la resolución de la pantalla.
 		int largoBarraTareas = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(screenSize.width, screenSize.height - largoBarraTareas);
@@ -292,7 +292,7 @@ public class FrmMain extends JFrame {
 		juego.getJugadores().get(0).getTropas().add(tropa);
 		juego.getTablero().construirEnCasilla(0, 4, tropa);
 
-		// Env�a el tablero a pnlTablero:
+		// Envía el tablero a pnlTablero:
 		this.setTableroUI(juego.getTablero());
 
 		// Nombre del jugador:
