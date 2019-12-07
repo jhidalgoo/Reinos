@@ -133,44 +133,44 @@ public class pnlTienda extends JFrame {
 
 		// Botones tropas
 
-		arquero = new JButton("   Arquero - 10 oro ");
+		arquero = new JButton("    Arquero       -   10 oro");
 		setIconButton(arquero, eIMG.IMG_ARQUERO);
 		panelTropas.add(arquero);
 
-		asesino = new JButton("    Asesino - 5 oro      ");
+		asesino = new JButton("   Asesino        -     5 oro");
 		setIconButton(asesino, eIMG.IMG_ASESINO);
 		panelTropas.add(asesino);
 
-		bersequer = new JButton("   Berserquer - 2 oro");
+		bersequer = new JButton("   Berserquer    -   25 oro");
 		setIconButton(bersequer, eIMG.IMG_BERSEQUER);
 		panelTropas.add(bersequer);
 
-		espadachin = new JButton("   Espadachín - 15 oro");
+		espadachin = new JButton("   EspadachÃ­n  -   15 oro");
 		setIconButton(espadachin, eIMG.IMG_ESPADACHIN);
 		panelTropas.add(espadachin);
 
-		espia = new JButton("   Espía - 5 oro          ");
+		espia = new JButton("    EspÃ­a            -     5 oro");
 		setIconButton(espia, eIMG.IMG_ESPIA);
 		panelTropas.add(espia);
 
-		jinete = new JButton("   Jinete - 15 oro          ");
+		jinete = new JButton(" Jinete             -  15 oro  ");
 		setIconButton(jinete, eIMG.IMG_JINETE);
 		panelTropas.add(jinete);
 
-		mago = new JButton("   Mago - 10 oro          ");
+		mago = new JButton("   Mago            -   10 oro");
+		setIconButton(mago, eIMG.IMG_MAGO);
 		panelTropas.add(mago);
 
 		// Botones defensas
 
-		catapulta = new JButton("   Catapulta - 8 oro");
+		catapulta = new JButton("   Catapulta   -  8 oro");
 		setIconButton(catapulta, eIMG.IMG_CATAPULTA);
 		panelDefensas.add(catapulta);
 
-		ballesta = new JButton("   Ballesta - 5 oro    ");
+		ballesta = new JButton("   Ballesta      -  5 oro");
 		setIconButton(ballesta, eIMG.IMG_BALLESTA);
 		panelDefensas.add(ballesta);
 
-		// this.add(panelPrincipal);
 		this.add(panelPrincipal, BorderLayout.PAGE_START);
 		pack();
 		agregarAcciones();
