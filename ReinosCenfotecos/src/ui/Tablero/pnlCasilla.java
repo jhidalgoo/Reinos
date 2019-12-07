@@ -1,5 +1,11 @@
 package ui.Tablero;
 
+import bl.Construccion.Construccion;
+import bl.Construccion.Tropa.Tropa;
+import bl.Construccion.Tablero.Casilla;
+import bl.Construccion.Tablero.CasillaActual;
+
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -14,6 +20,8 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class pnlCasilla extends JPanel implements MouseListener {
 	private pnlTablero tablero;
+	public int i;
+	public int j;
 	private Color[] fondo = new Color[] { new Color(220, 220, 220, 255), new Color(248, 248, 248, 255) };
 	private int[] casillaMarcada = new int[2]; //{ i, j }
 
@@ -45,6 +53,7 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		GradientPaint gp = new GradientPaint(0, 0, getFondo()[0], 0, this.getHeight(), getFondo()[1]);
 		g2.setPaint(gp);
 		g2.fillRect(2, 2, this.getWidth() - 4, this.getHeight() - 4);
+
 	}
 
 	public void setFondo(Color[] fondo) {
@@ -69,11 +78,26 @@ public class pnlCasilla extends JPanel implements MouseListener {
 		// Marcamos la casilla seleccionada.
 		this.setCasillaMarcada(tablero.getCoordenadas((pnlCasilla) e.getComponent()));
 
+		//Obtenemos la casilla del tablero para asignarla a la casilla actual
+		Casilla casillaActual = tablero.getTablero().getCasillas()[this.getCasillaMarcada()[0]][this.getCasillaMarcada()[1]];
+		CasillaActual.setCasilla(casillaActual);
+
 		Color[] colorVerde = new Color[] { new Color(20, 143, 119, 255), new Color(115, 198, 182, 255) };
 		this.tablero.pintarCasilla(this.getCasillaMarcada()[0], this.getCasillaMarcada()[1], colorVerde);
 
 		JOptionPane.showMessageDialog(null,
-				"Casilla seleccionada:\nI: " + this.getCasillaMarcada()[0] + ",  J: " + this.getCasillaMarcada()[1]);
+				"Casilla seleccionada:\nI: " + i + ",  J: " + j);
+		Construccion construccion = tablero.getTableroLogica().obtenerPiezaCasilla(i,j);
+		if(construccion instanceof Tropa){
+			Tropa tropa = (Tropa)construccion;
+			if(tablero.getTropaAtacante() == null){
+				tablero.setTropaAtacante(tropa);
+			}
+			else {
+				tablero.getTropaAtacante().atacar(tropa);
+			}
+		}
+
 
 	}
 
