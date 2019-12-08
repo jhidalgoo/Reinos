@@ -17,6 +17,9 @@ public class eIMG {
 	public static final String IMG_JINETE = "jinete.png";
 	public static final String IMG_ESPIA = "espia.png";
 	public static final String IMG_TROPA = "tropa.png";
+	
+	public static final String IMG_CASTILLO = "castillo.png";
+
 
 	public static Image getImage(String nombreImagen) {
 		ImageIcon icono = null;

@@ -41,25 +41,7 @@ public class pnlTablero extends JPanel {
 		--sizeCasillaW;
 		--sizeCasillaH;
 		construirCasillas(sizeCasillaW, sizeCasillaH);
-
-		// Pintar casillas que no est�n vacias:
-		for (Casilla[] i : tablero.getCasillas()) {
-			for (Casilla j : i) {
-				if (j.tienePieza()) {
-					Construccion laPieza = j.getPieza();
-					if (null != laPieza) {
-
-						int vida = laPieza.getVida();
-						String nombrePieza = laPieza.getNombre();
-
-						construirEnCasilla(j.getX(), j.getY(), nombrePieza, vida);
-
-						System.out.println(" [" + nombrePieza + " (" + j.getX() + " - " + j.getY() + ")] ");
-					}
-				}
-			}
-		}
-		System.out.println("\n\n");
+		repintarCasillas();
 	}
 
 	private void construirCasillas(int sizeCasillaW, int sizeCasillaH) {
@@ -76,10 +58,31 @@ public class pnlTablero extends JPanel {
 				this.add(casillasUI[j][i]);
 			}
 			Asesino asesino = new Asesino();
-			Jinete jinete  = new Jinete();
-			getTableroLogica().colocarPiezaCasilla(5,4, asesino);
-			getTableroLogica().colocarPiezaCasilla(3,4, jinete);
+			Jinete jinete = new Jinete();
+			getTableroLogica().colocarPiezaCasilla(5, 4, asesino);
+			getTableroLogica().colocarPiezaCasilla(3, 4, jinete);
 		}
+	}
+
+	public void repintarCasillas() {
+		// Pintar casillas que no están vacias:
+		for (Casilla[] i : tablero.getCasillas()) {
+			for (Casilla j : i) {
+				if (j.tienePieza()) {
+					Construccion laPieza = j.getPieza();
+					if (null != laPieza) {
+
+						int vida = laPieza.getVida();
+						String nombrePieza = laPieza.getNombre();
+
+						construirEnCasilla(j.getX(), j.getY(), nombrePieza);
+
+						System.out.println(" [" + nombrePieza + " (" + j.getX() + " - " + j.getY() + ")] ");
+					}
+				}
+			}
+		}
+		System.out.println("\n\n");
 	}
 
 	public int getAncho() {
@@ -106,7 +109,7 @@ public class pnlTablero extends JPanel {
 		this.tablero = tablero;
 	}
 
-	public void construirEnCasilla(int i, int j, String nombrePieza, int Vida) {
+	public void construirEnCasilla(int i, int j, String nombrePieza) {
 
 		// TODO: Aqu� se dibuja de acuerdo a la pieza obtenida.
 		// Por ejemplo si es un castillo: mostrar la imagen de un castillo.
