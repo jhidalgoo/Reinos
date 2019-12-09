@@ -4,21 +4,39 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import bl.Construccion.Construccion;
+import bl.Construccion.Recursos.Gemas.Tipo.Azul;
+import bl.Construccion.Recursos.Gemas.Tipo.Blanca;
+import bl.Construccion.Recursos.Gemas.Tipo.Verde;
+import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.Asesino;
 import bl.Construccion.Tropa.TropaAtaque.Jinete;
+import javafx.beans.binding.When;
+import ui.eConfiguracion;
+import ui.eIMG;
 
 @SuppressWarnings("serial")
 public class pnlTablero extends JPanel {
 
+	@SuppressWarnings("unused")
+	private eIMG eIMGIniciaConstructor = new eIMG();
 	private Tablero tablero;
-	private Tropa tropaAtacante;
+	private static Tropa tropaSeleccionada;
+	public static boolean isAtaque;
 	private pnlCasilla[][] casillasUI;
 	private int ancho; // width
 	private int largo; // height
-	private Color[] resaltarCasilla = new Color[] { new Color(255, 255, 92, 255), new Color(255, 255, 162, 255) };
+	private Color[] gris = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
+	private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
+	private Color[] Yellow3 = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
+	private Color[] Red = new Color[] { new Color(255, 45, 100, 100), new Color(255, 45, 100, 100) };
+	private Color[] Green = new Color[] { new Color(45, 255, 100, 100), new Color(45, 255, 100, 100) };
+	private Color[] White = new Color[] { new Color(255, 255, 255, 255), new Color(255, 255, 255, 255) };
+	private Color[] Blue = new Color[] { new Color(45, 100, 255, 100), new Color(45, 100, 255, 100) };
+
+	private int indexNumCastillo = 1;
 
 	/**
 	 * Create the panel.
@@ -27,8 +45,8 @@ public class pnlTablero extends JPanel {
 		this.tablero = tablero;
 		this.setLayout(null);
 		this.setSize(anchoTablero, largoTablero);
-		this.setBackground(new java.awt.Color(51, 51, 51));
-		this.setForeground(new java.awt.Color(250, 250, 250));
+		this.setBackground(eConfiguracion.COLOR_FONDO);
+		this.setForeground(eConfiguracion.COLOR_LETRA);
 
 		this.setAncho(tablero.getAncho());
 		this.setLargo(tablero.getLargo());
@@ -42,6 +60,7 @@ public class pnlTablero extends JPanel {
 		--sizeCasillaH;
 		construirCasillas(sizeCasillaW, sizeCasillaH);
 		repintarCasillas();
+
 	}
 
 	private void construirCasillas(int sizeCasillaW, int sizeCasillaH) {
@@ -55,6 +74,7 @@ public class pnlTablero extends JPanel {
 				casillasUI[j][i].setBounds(x, y, sizeCasillaW, sizeCasillaH);
 				casillasUI[j][i].i = j;
 				casillasUI[j][i].j = i;
+				casillasUI[j][i].setFondoCasilla(getColorDefault());
 				this.add(casillasUI[j][i]);
 			}
 			Asesino asesino = new Asesino();
@@ -71,18 +91,95 @@ public class pnlTablero extends JPanel {
 				if (j.tienePieza()) {
 					Construccion laPieza = j.getPieza();
 					if (null != laPieza) {
-
-						int vida = laPieza.getVida();
 						String nombrePieza = laPieza.getNombre();
 
 						construirEnCasilla(j.getX(), j.getY(), nombrePieza);
 
-						System.out.println(" [" + nombrePieza + " (" + j.getX() + " - " + j.getY() + ")] ");
+						// System.out.println(" [" + nombrePieza + " (" + j.getX() + " - " + j.getY() +
+						// ")] ");
+					}
+				}
+				if (j.tieneRecurso()) {
+					if (j.getRecurso() instanceof PowerUp) {
+						// pintarCasilla(j.getX(), j.getY(), Red);
+						construirEnCasilla(j.getX(), j.getY(), "PowerUp");
+					} else {
+						if (j.getRecurso() instanceof Azul) {
+							// pintarCasilla(j.getX(), j.getY(), Blue);
+							construirEnCasilla(j.getX(), j.getY(), "GemaAzul");
+						} else if (j.getRecurso() instanceof Blanca) {
+							// pintarCasilla(j.getX(), j.getY(), White);
+							construirEnCasilla(j.getX(), j.getY(), "GemaBlanca");
+						} else if (j.getRecurso() instanceof Verde) {
+							// pintarCasilla(j.getX(), j.getY(), Green);
+							construirEnCasilla(j.getX(), j.getY(), "GemaVerde");
+						}
 					}
 				}
 			}
 		}
 		System.out.println("\n\n");
+	}
+
+	public void construirEnCasilla(int i, int j, String nombrePieza) {
+
+		if (nombrePieza.trim().length() < 1) {
+			// Se pinta el color default y no se pone imagen (null).
+			casillasUI[i][j].setFondoCasilla(this.getColorDefault());
+			casillasUI[i][j].setImgActual(null);
+			casillasUI[i][j].repaint();
+
+		} else {
+
+			switch (nombrePieza.toUpperCase()) {
+
+			case "CASTILLO":
+				casillasUI[i][j].setFondoCasilla(grisClaro);
+				if (1 == indexNumCastillo)
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO1);
+
+				if (2 == indexNumCastillo)
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO2);
+
+				if (3 == indexNumCastillo)
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO3);
+
+				if (4 == indexNumCastillo)
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO4);
+
+				++indexNumCastillo;
+				break;
+
+			}
+
+			// pintarCasilla(i, j, getColorDefault());
+			// casillasUI[i][j].setImgActual(eIMG.getImage(eIMG.IMG_CASTILLO1));
+			casillasUI[i][j].repaint();
+			// this.repaint();
+		}
+	}
+
+	public int[] getCoordenadas(pnlCasilla casilla) {
+		for (int i = 0; i < this.getAncho(); ++i) {
+			for (int j = 0; j < this.getLargo(); ++j) {
+				if (this.casillasUI[i][j] == casilla) {
+					return new int[] { i, j };
+				}
+			}
+		}
+		return new int[2];
+	}
+
+	public Tablero getTableroLogica() {
+		return tablero;
+	}
+
+	public static Tropa getTropaSeleccionada() {
+		return tropaSeleccionada;
+	}
+
+	public static void setTropaSeleccionada(Tropa tropaSeleccionada) {
+		pnlTablero.tropaSeleccionada = tropaSeleccionada;
 	}
 
 	public int getAncho() {
@@ -109,40 +206,8 @@ public class pnlTablero extends JPanel {
 		this.tablero = tablero;
 	}
 
-	public void construirEnCasilla(int i, int j, String nombrePieza) {
-
-		// TODO: Aqu� se dibuja de acuerdo a la pieza obtenida.
-		// Por ejemplo si es un castillo: mostrar la imagen de un castillo.
-
-		casillasUI[i][j].setFondo(resaltarCasilla);
-		this.repaint();
+	public Color[] getColorDefault() {
+		return this.gris;
 	}
 
-	public void pintarCasilla(int i, int j, Color[] color) {
-		casillasUI[i][j].setFondo(color);
-		this.repaint();
-	}
-
-	public int[] getCoordenadas(pnlCasilla casilla) {
-		for (int i = 0; i < this.getAncho(); ++i) {
-			for (int j = 0; j < this.getLargo(); ++j) {
-				if (this.casillasUI[i][j] == casilla) {
-					return new int[] { i, j };
-				}
-			}
-		}
-		return new int[2];
-	}
-
-	public Tablero getTableroLogica() {
-		return tablero;
-	}
-
-	public Tropa getTropaAtacante() {
-		return tropaAtacante;
-	}
-
-	public void setTropaAtacante(Tropa tropaAtacante) {
-		this.tropaAtacante = tropaAtacante;
-	}
 }

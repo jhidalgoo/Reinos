@@ -51,7 +51,7 @@ public class Tablero implements ITablero {
     private void generarCasillas(int pAncho, int pLargo){
         for(int i = 0; i < pAncho; i++){
             for(int j = 0; j < pLargo; j++){
-                this.casillas[j][i] = new Casilla(j,i);
+                this.casillas[i][j] = new Casilla(i,j);
 			}
 		}
 	}
@@ -74,6 +74,13 @@ public class Tablero implements ITablero {
             return casilla.getPieza();
         return null;
     }
+
+	public boolean casillaTienePowerUp(int coordenadaX, int coordenadaY){
+		Casilla casilla = casillas[coordenadaX][coordenadaY];
+		if(casilla != null)
+			return true;
+		return false;
+	}
 
     public void colocarPiezaCasilla(int coordenadaX, int coordenadaY, Construccion pieza){
     	if(obtenerPiezaCasilla(coordenadaX,coordenadaY) == null){
@@ -213,6 +220,10 @@ public class Tablero implements ITablero {
 			tablero += "\n";
 		}
 		return tablero;
+	}
+
+	public Casilla obtenerCasilla(int x, int y){
+    	return casillas[x][y];
 	}
 
 }

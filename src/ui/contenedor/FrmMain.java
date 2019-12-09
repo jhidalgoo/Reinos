@@ -304,7 +304,7 @@ public class FrmMain extends JFrame {
 
 		// pasarTurno();
 
-		System.out.println(juego.getTablero().recorrerTablero());
+		//System.out.println(juego.getTablero().recorrerTablero());
 
 		// Mostrar el tablero:
 		this.mostrarTablero();
