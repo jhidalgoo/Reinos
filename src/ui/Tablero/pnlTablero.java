@@ -1,6 +1,8 @@
 package ui.Tablero;
 
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JPanel;
 
 import bl.Construccion.Construccion;
@@ -13,7 +15,6 @@ import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.Asesino;
 import bl.Construccion.Tropa.TropaAtaque.Jinete;
-import javafx.beans.binding.When;
 import ui.eConfiguracion;
 import ui.eIMG;
 
@@ -28,9 +29,10 @@ public class pnlTablero extends JPanel {
 	private pnlCasilla[][] casillasUI;
 	private int ancho; // width
 	private int largo; // height
+	private Cursor mano = new Cursor(Cursor.HAND_CURSOR);
 	private Color[] gris = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
 	private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
-	private Color[] Yellow3 = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
+	private Color[] Yellow = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
 	private Color[] Red = new Color[] { new Color(255, 45, 100, 100), new Color(255, 45, 100, 100) };
 	private Color[] Green = new Color[] { new Color(45, 255, 100, 100), new Color(45, 255, 100, 100) };
 	private Color[] White = new Color[] { new Color(255, 255, 255, 255), new Color(255, 255, 255, 255) };
@@ -91,17 +93,13 @@ public class pnlTablero extends JPanel {
 				if (j.tienePieza()) {
 					Construccion laPieza = j.getPieza();
 					if (null != laPieza) {
+						casillasUI[j.getX()][j.getY()].setCursor(mano);
 						String nombrePieza = laPieza.getNombre();
-
 						construirEnCasilla(j.getX(), j.getY(), nombrePieza);
-
-						// System.out.println(" [" + nombrePieza + " (" + j.getX() + " - " + j.getY() +
-						// ")] ");
 					}
 				}
 				if (j.tieneRecurso()) {
 					if (j.getRecurso() instanceof PowerUp) {
-						// pintarCasilla(j.getX(), j.getY(), Red);
 						construirEnCasilla(j.getX(), j.getY(), "PowerUp");
 					} else {
 						if (j.getRecurso() instanceof Azul) {
@@ -122,6 +120,7 @@ public class pnlTablero extends JPanel {
 	}
 
 	public void construirEnCasilla(int i, int j, String nombrePieza) {
+		// System.out.println("nombrePieza: " + nombrePieza);
 
 		if (nombrePieza.trim().length() < 1) {
 			// Se pinta el color default y no se pone imagen (null).
@@ -148,14 +147,67 @@ public class pnlTablero extends JPanel {
 					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO4);
 
 				++indexNumCastillo;
+
+				break;
+
+			case "BALLESTA":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_BALLESTA);
+				break;
+			case "CATAPULTA":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_CATAPULTA);
+				break;
+			case "ARQUERO":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_ARQUERO);
+				break;
+			case "ESPADACHIN":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_ESPADACHIN);
+				break;
+			case "BERSEQUER":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_BERSEQUER);
+				break;
+			case "MAGO":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_MAGO);
+				break;
+			case "ASESINO":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_ASESINO);
+				break;
+			case "JINETE":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_JINETE);
+				break;
+			case "ESPIA":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_ESPIA);
+				break;
+			case "TROPA":
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_TROPA);
+				break;
+			case "POWERUP":
+				if (null == eIMG.IMAGE_POWERUP)
+					casillasUI[i][j].setFondoCasilla(Red);
+				else
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_POWERUP);
+				break;
+			case "GEMAAZUL":
+				if (null == eIMG.IMAGE_GEMAAZUL)
+					casillasUI[i][j].setFondoCasilla(Blue);
+				else
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_GEMAAZUL);
+				break;
+			case "GEMABLANCA":
+				if (null == eIMG.IMAGE_GEMABLANCA)
+					casillasUI[i][j].setFondoCasilla(White);
+				else
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_GEMABLANCA);
+				break;
+			case "GEMAVERDE":
+				if (null == eIMG.IMAGE_GEMAVERDE)
+					casillasUI[i][j].setFondoCasilla(Green);
+				else
+					casillasUI[i][j].setImgActual(eIMG.IMAGE_GEMAVERDE);
 				break;
 
 			}
 
-			// pintarCasilla(i, j, getColorDefault());
-			// casillasUI[i][j].setImgActual(eIMG.getImage(eIMG.IMG_CASTILLO1));
 			casillasUI[i][j].repaint();
-			// this.repaint();
 		}
 	}
 

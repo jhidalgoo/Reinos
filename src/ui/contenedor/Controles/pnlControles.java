@@ -2,6 +2,7 @@ package ui.contenedor.Controles;
 
 import bl.Construccion.Tropa.Tropa;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
+import ui.eConfiguracion;
 import ui.Tablero.pnlTablero;
 
 import ui.contenedor.Controles.Tienda.pnlTienda;
@@ -26,11 +27,11 @@ public class pnlControles extends JPanel {
 	 * Create the panel.
 	 */
 	public pnlControles(int widthTablero) {
-		setBorder(new LineBorder(Color.RED));
+		setBorder(new LineBorder(new Color(255, 255, 204, 255)));
 		this.setLayout(null);
-		this.setSize(800, 140);
-		this.setBackground(new java.awt.Color(51, 51, 51));
-		this.setForeground(new java.awt.Color(250, 250, 250));
+		this.setSize(603, 140);
+		this.setBackground(eConfiguracion.COLOR_FONDO);
+		this.setForeground(eConfiguracion.COLOR_LETRA);
 
 		btnMover = new JButton("Mover");
 		btnMover.setBounds(45, 11, 142, 55);
@@ -62,36 +63,38 @@ public class pnlControles extends JPanel {
 	private void agregarAcciones() {
 		btnMover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acci�n de mover
+				// acción de mover
 			}
 		});
 
 		btnPasarTurno.addActionListener(e -> {
 			FrmMain.juego.pasarTurno();
 			String jugadorActual = FrmMain.juego.getTurnoActual().getJugador().getNombreJugador();
-			JOptionPane.showMessageDialog(new JPanel(), "Turno de " + jugadorActual, "Pasar turno", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(new JPanel(), "Turno de " + jugadorActual, "Pasar turno",
+					JOptionPane.INFORMATION_MESSAGE);
 		});
 
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(pnlTablero.getTropaSeleccionada() != null)
+				if (pnlTablero.getTropaSeleccionada() != null)
 					pnlTablero.isAtaque = true;
 			}
 		});
 
 		btnComprar.addActionListener(e -> {
 			pnlTienda pnlTienda = new pnlTienda();
+			pnlTienda.setVisible(true);
 		});
 		btnMisTropas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// acci�n de mis tropas
+				// acción de mis tropas
 			}
 		});
 		btnUsarPowerUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tropa tropa = pnlTablero.getTropaSeleccionada();
 				TropaAtaque tropaAtaque = null;
-				if (tropa != null && tropa instanceof TropaAtaque){
+				if (tropa != null && tropa instanceof TropaAtaque) {
 					tropaAtaque = (TropaAtaque) tropa;
 					tropaAtaque = tropaAtaque.usarPowerUp(tropaAtaque);
 					tropaAtaque.getCasilla().setPieza(tropaAtaque);

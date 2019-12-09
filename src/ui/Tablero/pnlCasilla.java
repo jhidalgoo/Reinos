@@ -5,7 +5,6 @@ import bl.Construccion.Recursos.IRecurso;
 import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tropa.Tropa;
-import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.CasillaActual;
 import bl.Construccion.Tropa.TropaAtaque.TropaAtaque;
 import ui.eConfiguracion;
