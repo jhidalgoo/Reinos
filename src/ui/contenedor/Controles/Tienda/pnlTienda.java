@@ -1,8 +1,8 @@
 package ui.contenedor.Controles.Tienda;
+import bl.Construccion.Juego.Juego;
 
 import ui.eConfiguracion;
 import ui.eIMG;
-import ui.contenedor.FrmMain;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.awt.*;
 public class pnlTienda extends JFrame {
 
 	@SuppressWarnings("unused")
-	private eIMG eIMGIniciaConstructor = new eIMG();
+    private Juego juego;
 
 	private JPanel panelPrincipal;
 	private JPanel panelTropas;
@@ -35,7 +35,8 @@ public class pnlTienda extends JFrame {
 	private JButton catapulta;
 	private JButton ballesta;
 
-	public pnlTienda() {
+    public pnlTienda(Juego juego){
+        setJuego(juego);
 		this.setSize(600, 600);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -45,7 +46,6 @@ public class pnlTienda extends JFrame {
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
 		this.setAlwaysOnTop(false);
-
 		// centrar:
 		this.setLocationRelativeTo(null);
 
@@ -71,16 +71,15 @@ public class pnlTienda extends JFrame {
 		panelPrincipal.add(titulo, gbc);
 
 		// Label oro disponible
-		oroJugador = new JLabel(
-				"Oro disponible: " + FrmMain.juego.getTurnoActual().getJugador().getCastillo().getOros());
-		oroJugador.setFont(new Font(oroJugador.getFont().getName(), oroJugador.getFont().getStyle(), 15));
-		oroJugador.setBorder(new LineBorder(Color.BLACK));
-		oroJugador.setBackground(new Color(60, 179, 113));
-		oroJugador.setOpaque(true);
-		oroJugador.setPreferredSize(new Dimension(250, 30));
-		oroJugador.setHorizontalAlignment(JLabel.CENTER);
-		oroJugador.setVerticalAlignment(JLabel.CENTER);
-		gbc.gridwidth = 2;
+        oroJugador = new JLabel("Oro disponible: " + getJuego().getTurnoActual().getJugador().getCastillo().getOros());
+        oroJugador.setFont(new Font(oroJugador.getFont().getName(), oroJugador.getFont().getStyle(), 15));
+        oroJugador.setBorder(new LineBorder(Color.BLACK));
+        oroJugador.setBackground(new Color(60,179,113));
+        oroJugador.setOpaque(true);
+        oroJugador.setPreferredSize(new Dimension(250, 30));
+        oroJugador.setHorizontalAlignment(JLabel.CENTER);
+        oroJugador.setVerticalAlignment(JLabel.CENTER);
+        gbc.gridwidth = 2;
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
@@ -197,8 +196,7 @@ public class pnlTienda extends JFrame {
 		try {
 			boolean compraRealizada = false;
 
-			compraRealizada = FrmMain.juego.getTienda().comprarTropa(FrmMain.juego.getTurnoActual().getJugador(),
-					tipoTropa);
+            compraRealizada = getJuego().getTienda().comprarTropa(getJuego().getTurnoActual().getJugador(), tipoTropa);
 
 			if (compraRealizada) {
 				mostrarMensaje();
@@ -216,7 +214,15 @@ public class pnlTienda extends JFrame {
 	}
 
 	private void actualizarOro() {
-		oroJugador.setText("Oro disponible: " + FrmMain.juego.getTurnoActual().getJugador().getCastillo().getOros());
+        oroJugador.setText("Oro disponible: " + getJuego().getTurnoActual().getJugador().getCastillo().getOros());
+    }
+
+    public Juego getJuego() {
+        return juego;
+    }
+
+    public void setJuego(Juego juego) {
+        this.juego = juego;
 	}
 
 	private void setIconButton(JButton btn, ImageIcon imagenIcono) {

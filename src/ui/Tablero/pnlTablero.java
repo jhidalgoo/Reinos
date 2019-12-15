@@ -6,6 +6,8 @@ import java.awt.Cursor;
 import javax.swing.JPanel;
 
 import bl.Construccion.Construccion;
+import bl.Construccion.Excepciones.ExcepcionJuego;
+import bl.Construccion.Juego.Juego;
 import bl.Construccion.Recursos.Gemas.Tipo.Azul;
 import bl.Construccion.Recursos.Gemas.Tipo.Blanca;
 import bl.Construccion.Recursos.Gemas.Tipo.Verde;
@@ -23,12 +25,12 @@ public class pnlTablero extends JPanel {
 
 	@SuppressWarnings("unused")
 	private eIMG eIMGIniciaConstructor = new eIMG();
-	private Tablero tablero;
 	private static Tropa tropaSeleccionada;
 	public static boolean isAtaque;
 	private pnlCasilla[][] casillasUI;
 	private int ancho; // width
 	private int largo; // height
+	private Juego juego;
 	private Cursor mano = new Cursor(Cursor.HAND_CURSOR);
 	private Color[] gris = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
 	private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
@@ -43,17 +45,14 @@ public class pnlTablero extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public pnlTablero(int anchoTablero, int largoTablero, Tablero tablero) {
-		this.tablero = tablero;
+	public pnlTablero(int anchoTablero, int largoTablero, Juego juego) {
 		this.setLayout(null);
 		this.setSize(anchoTablero, largoTablero);
 		this.setBackground(eConfiguracion.COLOR_FONDO);
 		this.setForeground(eConfiguracion.COLOR_LETRA);
-
-		this.setAncho(tablero.getAncho());
-		this.setLargo(tablero.getLargo());
-
-		this.setTablero(tablero);
+		this.setJuego(juego);
+		this.setAncho(getJuego().getTablero().getAncho());
+		this.setLargo(getJuego().getTablero().getLargo());
 
 		int sizeCasillaW = (int) anchoTablero / this.getLargo();
 		int sizeCasillaH = (int) largoTablero / this.getAncho();
@@ -79,16 +78,12 @@ public class pnlTablero extends JPanel {
 				casillasUI[j][i].setFondoCasilla(getColorDefault());
 				this.add(casillasUI[j][i]);
 			}
-			Asesino asesino = new Asesino();
-			Jinete jinete = new Jinete();
-			getTableroLogica().colocarPiezaCasilla(5, 4, asesino);
-			getTableroLogica().colocarPiezaCasilla(3, 4, jinete);
 		}
 	}
 
 	public void repintarCasillas() {
 		// Pintar casillas que no están vacias:
-		for (Casilla[] i : tablero.getCasillas()) {
+		for (Casilla[] i : juego.getTablero().getCasillas()) {
 			for (Casilla j : i) {
 				if (false == j.tienePieza() && false == j.tieneRecurso()) {
 					// Se pinta el color default
@@ -121,8 +116,9 @@ public class pnlTablero extends JPanel {
 				}
 			}
 		}
-		System.out.println("\n\n");
 	}
+
+
 
 	public void construirEnCasilla(int i, int j, String nombrePieza) {
 		// System.out.println("nombrePieza: " + nombrePieza);
@@ -227,10 +223,20 @@ public class pnlTablero extends JPanel {
 		return new int[2];
 	}
 
-	public Tablero getTableroLogica() {
-		return tablero;
+	public void moverPieza(int origenX, int origenY, int destinoX, int destinoY){
+		juego.moverPieza(origenX,origenY,destinoX,destinoY);
+		repintarCasillas();
 	}
 
+	public void ponerPiezaEnJuego(int origenX, int origenY, int destinoX, int destinoY){
+		juego.ponerPiezaEnJuego(origenX,origenY,destinoX,destinoY,getTropaSeleccionada());
+		repintarCasillas();
+	}
+
+	public Tablero getTableroLogica() {
+		return juego.getTablero();
+	}
+	
 	public static Tropa getTropaSeleccionada() {
 		return tropaSeleccionada;
 	}
@@ -255,16 +261,15 @@ public class pnlTablero extends JPanel {
 		this.largo = largo;
 	}
 
-	public Tablero getTablero() {
-		return tablero;
-	}
-
-	public void setTablero(Tablero tablero) {
-		this.tablero = tablero;
-	}
-
 	public Color[] getColorDefault() {
 		return this.gris;
 	}
 
+	public void setJuego(Juego juego) {
+		this.juego = juego;
+	}
+
+	public Juego getJuego() {
+		return juego;
+	}
 }
