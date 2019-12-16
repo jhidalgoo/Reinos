@@ -31,7 +31,8 @@ public class pnlTablero extends JPanel {
 	private Cursor mano = new Cursor(Cursor.HAND_CURSOR);
 	private Color[] gris = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
 	private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
-	//private Color[] Yellow = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
+	// private Color[] Yellow = new Color[] { new Color(255, 255, 92, 200), new
+	// Color(255, 255, 162, 200) };
 	private Color[] Red = new Color[] { new Color(255, 45, 100, 100), new Color(255, 45, 100, 100) };
 	private Color[] Green = new Color[] { new Color(45, 255, 100, 100), new Color(45, 255, 100, 100) };
 	private Color[] White = new Color[] { new Color(255, 255, 255, 255), new Color(255, 255, 255, 255) };
@@ -114,8 +115,6 @@ public class pnlTablero extends JPanel {
 			}
 		}
 	}
-
-
 
 	public void construirEnCasilla(int i, int j, String nombrePieza) {
 		// System.out.println("nombrePieza: " + nombrePieza);
@@ -220,20 +219,20 @@ public class pnlTablero extends JPanel {
 		return new int[2];
 	}
 
-	public void moverPieza(int origenX, int origenY, int destinoX, int destinoY){
-		juego.moverPieza(origenX,origenY,destinoX,destinoY);
+	public void moverPieza(int origenX, int origenY, int destinoX, int destinoY) {
+		juego.moverPieza(origenX, origenY, destinoX, destinoY);
 		repintarCasillas();
 	}
 
-	public void ponerPiezaEnJuego(int origenX, int origenY, int destinoX, int destinoY){
-		juego.ponerPiezaEnJuego(origenX,origenY,destinoX,destinoY,getTropaSeleccionada());
+	public void ponerPiezaEnJuego(int origenX, int origenY, int destinoX, int destinoY) {
+		juego.ponerPiezaEnJuego(origenX, origenY, destinoX, destinoY, getTropaSeleccionada());
 		repintarCasillas();
 	}
 
 	public Tablero getTableroLogica() {
 		return juego.getTablero();
 	}
-	
+
 	public static Tropa getTropaSeleccionada() {
 		return tropaSeleccionada;
 	}

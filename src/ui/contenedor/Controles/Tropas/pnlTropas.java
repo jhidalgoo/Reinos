@@ -6,7 +6,6 @@ import ui.Tablero.pnlTablero;
 import ui.eConfiguracion;
 import ui.eIMG;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -34,7 +33,7 @@ public class pnlTropas extends JFrame {
 	public pnlTropas(Juego juego) {
 
 		setJuego(juego);
-		this.setSize(400, 600);
+		this.setSize(400, 550);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -49,7 +48,7 @@ public class pnlTropas extends JFrame {
 		// PANEL PRINCIPAL
 		panelPrincipal = new JPanel();
 		panelPrincipal.setPreferredSize(new Dimension(this.getWidth(), 400));
-		panelPrincipal.setLayout(new FlowLayout());
+		panelPrincipal.setLayout(null);
 		panelPrincipal.setBorder(null);
 		this.add(panelPrincipal);
 
@@ -57,27 +56,29 @@ public class pnlTropas extends JFrame {
 		titulo.setFont(new Font(titulo.getFont().getName(), titulo.getFont().getStyle(), 20));
 		titulo.setBackground(new Color(46, 139, 87));
 		titulo.setOpaque(true);
-		titulo.setPreferredSize(new Dimension(this.getWidth(), 75));
+		titulo.setBounds(0, 0, this.getWidth(), 75);
 		titulo.setHorizontalAlignment(JLabel.CENTER);
 		titulo.setVerticalAlignment(JLabel.CENTER);
 		titulo.setBorder(null);
-		panelPrincipal.add(titulo);
+		panelPrincipal.add(titulo, null);
 
 		// Label descripcion
 		descripcion = new JLabel("Seleccione la tropa que desea agregar: ");
 		descripcion.setFont(new Font(titulo.getFont().getName(), titulo.getFont().getStyle(), 15));
 		descripcion.setBackground(new Color(60, 179, 113));
 		descripcion.setOpaque(true);
-		descripcion.setPreferredSize(new Dimension(this.getWidth(), 45));
+		descripcion.setBounds(0, titulo.getHeight(), this.getWidth(), 45);
 		descripcion.setHorizontalAlignment(JLabel.CENTER);
 		descripcion.setVerticalAlignment(JLabel.CENTER);
-		titulo.setBorder(null);
+		descripcion.setBorder(null);
 		panelPrincipal.add(descripcion);
 
 		// Panel botones
 		panelBotones = new JPanel();
 		panelBotones.setForeground(this.getForeground());
 		panelBotones.setPreferredSize(new Dimension(this.getWidth(), 400));
+
+		panelBotones.setBounds(0, titulo.getHeight() + descripcion.getHeight(), this.getWidth(), 400);
 		panelBotones.setLayout(new GridLayout(7, 1));
 
 		// Se crean y se agregan todos los botones al panel de botones
@@ -106,7 +107,7 @@ public class pnlTropas extends JFrame {
 				botonTropa = new JButton("Tropa " + posicion);
 				botonTropa.setEnabled(false);
 			}
-			
+
 			botones.add(botonTropa);
 			panelBotones.add(botonTropa);
 		}
