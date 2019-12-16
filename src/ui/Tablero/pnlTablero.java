@@ -14,6 +14,7 @@ import bl.Construccion.Recursos.PowerUps.PowerUp;
 import bl.Construccion.Tablero.Casilla;
 import bl.Construccion.Tablero.Tablero;
 import bl.Construccion.Tropa.Tropa;
+import ui.contenedor.Controles.pnlDado;
 import ui.eConfiguracion;
 import ui.eIMG;
 
@@ -28,21 +29,20 @@ public class pnlTablero extends JPanel {
 	private int ancho; // width
 	private int largo; // height
 	private Juego juego;
+	private pnlDado pnlDado;
 	private Cursor mano = new Cursor(Cursor.HAND_CURSOR);
 	private Color[] gris = new Color[] { new Color(200, 200, 200, 200), new Color(200, 200, 200, 200) };
-	private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
+	//private Color[] grisClaro = new Color[] { new Color(230, 230, 230, 255), new Color(240, 240, 240, 255) };
 	//private Color[] Yellow = new Color[] { new Color(255, 255, 92, 200), new Color(255, 255, 162, 200) };
 	private Color[] Red = new Color[] { new Color(255, 45, 100, 100), new Color(255, 45, 100, 100) };
 	private Color[] Green = new Color[] { new Color(45, 255, 100, 100), new Color(45, 255, 100, 100) };
 	private Color[] White = new Color[] { new Color(255, 255, 255, 255), new Color(255, 255, 255, 255) };
 	private Color[] Blue = new Color[] { new Color(45, 100, 255, 100), new Color(45, 100, 255, 100) };
 
-	private int indexNumCastillo = 1;
-
 	/**
 	 * Create the panel.
 	 */
-	public pnlTablero(int anchoTablero, int largoTablero, Juego juego) {
+	public pnlTablero(int anchoTablero, int largoTablero, Juego juego, pnlDado pnlDado) {
 		this.setLayout(null);
 		this.setSize(anchoTablero, largoTablero);
 		this.setBackground(eConfiguracion.COLOR_FONDO);
@@ -50,6 +50,7 @@ public class pnlTablero extends JPanel {
 		this.setJuego(juego);
 		this.setAncho(getJuego().getTablero().getAncho());
 		this.setLargo(getJuego().getTablero().getLargo());
+		this.setPnlDado(pnlDado);
 
 		int sizeCasillaW = (int) anchoTablero / this.getLargo();
 		int sizeCasillaH = (int) largoTablero / this.getAncho();
@@ -113,6 +114,7 @@ public class pnlTablero extends JPanel {
 				}
 			}
 		}
+		pnlDado.actualizarNumero();
 	}
 
 	public void construirEnCasilla(int i, int j, String nombrePieza) {
@@ -129,21 +131,7 @@ public class pnlTablero extends JPanel {
 			switch (nombrePieza.toUpperCase()) {
 
 			case "CASTILLO":
-				casillasUI[i][j].setFondoCasilla(grisClaro);
-				if (1 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO1);
-
-				if (2 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO2);
-
-				if (3 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO3);
-
-				if (4 == indexNumCastillo)
-					casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO4);
-
-				++indexNumCastillo;
-
+				casillasUI[i][j].setImgActual(eIMG.IMAGE_CASTILLO1);
 				break;
 
 			case "BALLESTA":
@@ -266,5 +254,13 @@ public class pnlTablero extends JPanel {
 
 	public Juego getJuego() {
 		return juego;
+	}
+
+	public ui.contenedor.Controles.pnlDado getPnlDado() {
+		return pnlDado;
+	}
+
+	public void setPnlDado(ui.contenedor.Controles.pnlDado pnlDado) {
+		this.pnlDado = pnlDado;
 	}
 }
