@@ -12,11 +12,10 @@ import bl.Construccion.Fachada.Fachada;
 import bl.Construccion.Juego.Juego;
 import bl.Construccion.Jugadores.Jugador;
 import bl.Construccion.Tablero.Tablero;
-import bl.Construccion.Tropa.Tropa;
-import bl.Construccion.Tropa.TropaAtaque.Arquero;
 import ui.eConfiguracion;
 import ui.eIMG;
 import ui.contenedor.Controles.pnlControles;
+import ui.contenedor.Controles.pnlDado;
 import ui.Tablero.pnlTablero;
 import ui.contenedor.componentes.*;
 import java.awt.Toolkit;
@@ -30,6 +29,7 @@ import java.awt.event.MouseEvent;
 public class FrmMain extends JFrame {
 
 	private static Juego juego;
+	private pnlDado dado;
 
 	@SuppressWarnings("unused")
 	private eIMG eIMGIniciaConstructor = new eIMG();
@@ -44,14 +44,6 @@ public class FrmMain extends JFrame {
 
 	private JLabel txtJugador = new JLabel();
 
-	public JLabel getTxtJugador() {
-		return txtJugador;
-	}
-
-	public void setTxtJugador(JLabel txtJugador) {
-		this.txtJugador = txtJugador;
-	}
-
 	private pnlTablero tableroUI;
 	private pnlControles pnlControles;
 
@@ -61,11 +53,8 @@ public class FrmMain extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmMain() {
-		int cantidadJugadores = getCantidadDeJugadores();
-		this.setCantidadJugadores(cantidadJugadores);
-		juego = new Fachada().construirJuego(cantidadJugadores);
 
-		//Se determinan las caracteristicas para la escena del juego
+		// Se determinan las caracteristicas para la escena del juego
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setBounds(0, 0, 780, 430);
 		this.setResizable(false);
@@ -82,7 +71,7 @@ public class FrmMain extends JFrame {
 			}
 		});
 
-		//Se crea el panel principal
+		// Se crea el panel principal
 		pnlMain = new JPanel();
 
 		pnlMain.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,13 +84,13 @@ public class FrmMain extends JFrame {
 		int mainAncho = (pnlMain.getWidth() - pnlMain.getInsets().left - pnlMain.getInsets().right);
 		int mainAlto = (pnlMain.getHeight() - pnlMain.getInsets().top - pnlMain.getInsets().bottom);
 
-		//Se crea el panel superior
+		// Se crea el panel superior
 		pPnlArriba = new pnlArriba(pnlMain.getWidth());
 		pPnlArriba.setBounds(0, 0, pPnlArriba.getWidth(), pPnlArriba.getHeight());
 		pnlMain.add(pPnlArriba, null);
 		int arribaAlto = (pPnlArriba.getHeight() - pPnlArriba.getInsets().top - pPnlArriba.getInsets().bottom);
 
-		//Se crea el boton de salida del juego
+		// Se crea el boton de salida del juego
 		btnSalir.setBackground(new java.awt.Color(71, 71, 71));
 		btnSalir.setFont(new Font("Viner Hand ITC", 1, 18));
 		btnSalir.setForeground(new java.awt.Color(255, 102, 102));
@@ -142,15 +131,9 @@ public class FrmMain extends JFrame {
 				- pPnlArriba.getInsets().right) / 2;
 		pPnlArriba.add(txtTitulo, null);
 		txtTitulo.setBounds(txtTituloX, 0, txtTituloAncho, 47);
-		
-		
-		
-		
 
 		pPnlAbajo = new pnlAbajo(pnlMain.getWidth());
-		
-		
-		
+
 		pPnlAbajo.add(txtJugador, null);
 		txtJugador.setText("           ");
 		txtJugador.setFont(new java.awt.Font("Snap ITC", 1, 18));
@@ -158,11 +141,20 @@ public class FrmMain extends JFrame {
 		txtJugador.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		txtJugador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		txtJugador.setBounds(40, 0, 400, 40);
-		
-		
-		pnlMain.add(pPnlAbajo, null);
 
-		pnlControles = new pnlControles(pnlMain.getWidth(), juego, txtJugador);
+		this.setBackground(eConfiguracion.COLOR_FONDO);
+		this.setForeground(eConfiguracion.COLOR_LETRA);
+		this.setVisible(true);
+
+		int cantidadJugadores = getCantidadDeJugadores();
+		this.setCantidadJugadores(cantidadJugadores);
+		juego = new Fachada().construirJuego(cantidadJugadores);
+		dado = new pnlDado(juego);
+
+		dado.setBounds(40, 60, dado.getWidth(), dado.getHeight());
+		pnlControles = new pnlControles(pnlMain.getWidth(), juego, txtJugador, dado);
+
+		pPnlAbajo.add(dado, null);
 
 		pPnlAbajo.add(pnlControles);
 		pPnlAbajo.setSize(pPnlAbajo.getWidth(), pnlControles.getHeight());
@@ -184,6 +176,8 @@ public class FrmMain extends JFrame {
 		int abajoAlto = (pPnlAbajo.getHeight() - pPnlAbajo.getInsets().top - pPnlAbajo.getInsets().bottom);
 
 		int centroAlto = (mainAlto - arribaAlto - abajoAlto);
+
+		pnlMain.add(pPnlAbajo, null);
 
 		// Margen:
 		centroAlto -= 5;
@@ -303,9 +297,12 @@ public class FrmMain extends JFrame {
 
 	public void iniciar() {
 		FabricadorDeTropas.procesarFuncion(1);
-		Tropa tropa = new Arquero();
-		juego.getJugadores().get(0).getTropas().add(tropa);
-		juego.getTablero().construirEnCasilla(0, 4, tropa);
+
+		/*
+		 * Tropa tropa = new Arquero();
+		 * juego.getJugadores().get(0).getTropas().add(tropa);
+		 * juego.getTablero().construirEnCasilla(0, 4, tropa);
+		 */
 
 		// Envía el tablero a pnlTablero:
 		this.setTableroUI(juego.getTablero());
@@ -316,7 +313,7 @@ public class FrmMain extends JFrame {
 			jugador.setNombreJugador("Jugador" + numJugador);
 			++numJugador;
 		}
-		
+
 		txtJugador.setText(getJuego().getTurnoActual().getJugador().getNombreJugador());
 
 		// Mostrar el tablero:
@@ -332,5 +329,12 @@ public class FrmMain extends JFrame {
 		this.juego = juego;
 	}
 
+	public JLabel getTxtJugador() {
+		return txtJugador;
+	}
+
+	public void setTxtJugador(JLabel txtJugador) {
+		this.txtJugador = txtJugador;
+	}
 
 }

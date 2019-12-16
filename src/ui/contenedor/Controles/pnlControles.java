@@ -26,11 +26,14 @@ public class pnlControles extends JPanel {
 	private Juego juego;
 	private JButton btnUsarPowerUp;
 	private JLabel txtJugador;
+	
+	private pnlDado dado;
 
 	/**
 	 * Create the panel.
 	 */
-	public pnlControles(int widthTablero, Juego juego, JLabel txtJugador) {
+	public pnlControles(int widthTablero, Juego juego, JLabel txtJugador, pnlDado dado) {
+		this.dado = dado;
 		this.setTxtJugador(txtJugador);
 		setBorder(new LineBorder(new Color(255, 255, 204, 255)));
 		this.juego = juego;
@@ -88,6 +91,7 @@ public class pnlControles extends JPanel {
 		btnPasarTurno.addActionListener(e -> {
 			juego.pasarTurno();
 			txtJugador.setText(juego.getTurnoActual().getJugador().getNombreJugador());
+			this.dado.limpiarNumero();
 		});
 
 		btnAtacar.addActionListener(new ActionListener() {
